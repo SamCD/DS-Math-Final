@@ -237,3 +237,6 @@ CI2 <- c(lower2,upper2)
 # provide the empirical 5th percentile and 95th percentile of the data
 q1 <- quantile(PDFdata, c(.05,.95),na.rm = TRUE) 
 q2 <- quantile(aDel, c(.05,.95),na.rm = TRUE) 
+
+# Analysis: There is a considerable difference between the quantiles and the confidence
+# intervals of the empirical data and the exponential data.
