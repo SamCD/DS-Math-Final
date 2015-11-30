@@ -82,11 +82,11 @@ c <- (pYgtyGXltx * pXltx) / ((pYgtyGXltx * pXltx) + (pYgtyGXgtx * pXgtx))
 # the third quartile of measured Distances, given that the Arrival Delay is 
 # know to be above the second quartile for Arrival Delays, is 0.4611347
 
-# d. P(X<x | Y>y)
-d <- (pYgtyGXltx * pXltx) / ((pYgtyGXltx * pXltx) + (pYgtyGXgtx * pXgtx))
+# d. P(X<x, Y>y)
+d <- pXltx * pYgtyGXltx
 # The probability of a random Distance measurement being below
-# the third quartile of measured Distances, given that the Arrival Delay is 
-# know to be above the second quartile for Arrival Delays, is 0.4611347
+# the third quartile of measured Distances, AND that a random Arrival Delay is 
+# above the second quartile for Arrival Delays, is 0.1161175
 
 #Joint Counts
 Xgtx_Ygty <- nrow(subset(joint,Distance > x & ArrDelay > y))
