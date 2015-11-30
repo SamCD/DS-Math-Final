@@ -112,6 +112,10 @@ countTab <- matrix(c(Xltx_Ylty
 # [3,] 120576 110542 227496
 
 # Does splitting the data in this fashion make them independent?
+# Looking at the third row and third column, the variables could appear to be independent
+# since there doesn't seem to be a relationship between the values. However, there is no
+# suggestion in the counts of joint probabilites that they exist independently of one
+# another.
 
 # Let A be the new variable 
 # counting those observations above the 3d quartile for X, and let B be the new 
@@ -206,7 +210,7 @@ aDelShift <- na.omit(aDel + 71.00)
 # fit an exponential probability density function. Find the optimal value of lambda for
 # this distribution, and then take 1000 samples from this exponential distribution 
 # using this value. Plot a histogram and compare it with a histogram of your original
-# variable. Plot a histogram and compare it with a histogram of your original variable.
+# variable                                                                                                 rexp(1000, )). Plot a histogram and compare it with a histogram of your original variable.
 expPDF <- fitdistr(aDelShift,"exponential")
 lambda <- expPDF$estimate
 PDFdata <- rexp(1000,lambda)
@@ -217,9 +221,19 @@ hist(aDel)
 # distribution function (CDF)
 p95 <- qnorm(0.95,expPDF$estimate,expPDF$sd)
 p05 <- qnorm(0.05,expPDF$estimate,expPDF$sd)
-  
-  
 
+# generate a 95% confidence interval from the empirical data
+error <- qnorm(0.975)*(expPDF$sd/sqrt(expPDF$n))
+lower <- lambda - error
+upper <- lambda + error
+CI <- c(lower,upper)
+# 0.01280491 < rate < 0.01280514 
+error2 <- qnorm(0.975)*(sdY/sqrt(total))
+lower2 <- muY - error2
+upper2 <- muY + error2
+CI2 <- c(lower2,upper2)
+# 6.968146 < Y < 7.220523
 
-
-
+# provide the empirical 5th percentile and 95th percentile of the data
+q1 <- quantile(PDFdata, c(.05,.95),na.rm = TRUE) 
+q2 <- quantile(aDel, c(.05,.95),na.rm = TRUE) 
